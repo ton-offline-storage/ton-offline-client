@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+        <title>TON offline client</title>
+        <link rel="stylesheet" href="styles/styles.css">
+    </head>
+    <body>
+        <div class="full-screen center-column" id="start-screen">
+            <button class="center-column button-sizing-1" id="choose-create-wallet-button">Create Wallet</a>
+            <button class="center-column button-sizing-1" id="choose-make-txn-button">Make a transaction</a>
+        </div>
+        <div class="full-screen center-column" id="mnemonic-screen" style="display: none;">
+            <button class="style-2 arrow-button left-corner-location" id="mnemonic-back-button"></button>
+            <header class="header">
+                <h1 id="mnemonic-header">Generate your 24-word seed phrase in any convenient way. 
+                    Write it down or remember, and enter here</h1>
+            </header>
+            <div class="grid-6x4">
+                <div class="word-slot">
+                    <label class="num-label">1.</label>
+                    <input id="word-input-1" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">2.</label>
+                    <input id="word-input-2" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">3.</label>
+                    <input id="word-input-3" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">4.</label>
+                    <input id="word-input-4" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">5.</label>
+                    <input id="word-input-5" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">6.</label>
+                    <input id="word-input-6" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">7.</label>
+                    <input id="word-input-7" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">8.</label>
+                    <input id="word-input-8" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">9.</label>
+                    <input id="word-input-9" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">10.</label>
+                    <input id="word-input-10" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">11.</label>
+                    <input id="word-input-11" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">12.</label>
+                    <input id="word-input-12" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">13.</label>
+                    <input id="word-input-13" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">14.</label>
+                    <input id="word-input-14" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">15.</label>
+                    <input id="word-input-15" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">16.</label>
+                    <input id="word-input-16" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">17.</label>
+                    <input id="word-input-17" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">18.</label>
+                    <input id="word-input-18" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">19.</label>
+                    <input id="word-input-19" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">20.</label>
+                    <input id="word-input-20" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">21.</label>
+                    <input id="word-input-21" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">22.</label>
+                    <input id="word-input-22" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">23.</label>
+                    <input id="word-input-23" type="text" autocomplete="off"></input>
+                </div>
+                <div class="word-slot">
+                    <label class="num-label">24.</label>
+                    <input id="word-input-24" type="text" autocomplete="off"></input>
+                </div>
+            </div>
+            <div class="center-row row-sizing-1">
+                <button id="generate-mnemonic-button" type="button" class="button-sizing-2">
+                    Generate new mnemonic
+                </button>
+                <button id="confirm-mnemonic-button" type="button" class="button-sizing-2">Next</button>
+            </div>
+            <label class="alert-label" id="wrong-mnemonic-alert-label">Filler text</label>
+        </div>
+
+        <div class="full-screen" id="new-wallet-screen" style="display: none;">
+            <button class="style-2 arrow-button left-corner-location" id="new-wallet-back-button"></button>
+            <div class="center-column-upside">
+                <div class="center-column">
+                    <label class="info-label line-unbreakable">Your public address is:</label>
+                    <div class="center-row">
+                        <label class="data-label label-sizing-2" id="public-address-label"></label>
+                        <button class="style-2 button-sizing-4 line-unbreakable" id="show-address-qr-button-1">
+                            Scan QR code</button>
+                    </div>
+                </div>
+                <label class="info-label label-sizing-1">Send some TON to this address. 
+                    The amount should be sufficient to cover one transaction fee. 
+                    After that, transfer the deployment transaction to an online device 
+                    using this QR code or binary .boc file, and broadcast it.
+                </label>
+                <div id="deployment-qr-code"></div>
+                <a class="center-column button-sizing-3" id="download-boc-link" download="wallet-deployment.boc">
+                    Download transaction file</a>
+            </div>
+            <div class="overlay center-column" id='qr-overlay-1' style="display: none;">
+                <div class="popup center-column" id='qr-container-1'></div>
+            </div>
+        </div>
+
+        <div class="full-screen" id='txn-screen' style="display: none;">
+            <button class="style-2 arrow-button left-corner-location" id="txn-back-button"></button>
+            <button class="style-2 button-sizing-5 line-unbreakable corner-location" id="show-address-qr-button-2">
+                Your Public Address</button>
+            <div class="overlay center-column" id='qr-overlay-2' style="display: none;">
+                <div class="popup center-column" id='qr-popup-2'>
+                    <div id="qr-container-2"></div>
+                    <label class="data-label label-sizing-4" id="public-address-label-2"></label>
+                </div>
+            </div>
+            <div class="full-size center-column" id="txn-elements">
+                <label class="label-sizing-5">Recepient address</label>
+                <input class="input-styling-2" id="recipient-address-input" 
+                type="text" placeholder="Enter wallet address" autocomplete="off"></input>
+                <label class="label-sizing-5">Amount</label>
+                <input class="input-styling-2" id="amount-input" type="text" placeholder="0" autocomplete="off"></input>
+                <div class="label-styling-1" style="position: relative;">
+                    <label class="label-sizing-6">Seqno</label>
+                    <button class="circle center-column style-3" id="seqno-help-button">?</button>
+                    <label class="popup-label" id="seqno-help-label" style="visibility: hidden;">
+                        This is the number of outgoing transactions, sent from your current address, including
+                        the deployment transaction. If you are not sure,
+                        check the seqno parameter of your address in some TON blockchain explorer.
+                    </label>
+                </div>
+                <input class="input-styling-2" id="seqno-input" type="text" 
+                placeholder="Number of outgoing transactions sent" autocomplete="off"></input>
+                <label class="label-sizing-5">Transaction comment</label>
+                <input class="input-styling-2" id="comment-input" type="text" placeholder="Comment(optional)" autocomplete="off">
+                </input>
+                <button class="button-sizing-6" id="sign-transaction-button">Sign</button>
+                <label class="alert-label" id="wrong-txn-alert-label">Filler text</label>
+            </div>
+            <div class="overlay center-column" id='qr-overlay-3' style="display: none;">
+                <div class="popup center-column" id='qr-popup-3'>
+                    <label class="info-label">Scan QR code</label>
+                    <div id="qr-container-3"></div>
+                    <label class="info-label">Or</label>
+                    <a class="center-column button-sizing-7" id="download-boc-link-2" 
+                    download="transaction.boc" href="#">Download transaction file</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="libs/tonweb.js"></script>
+        <script src="libs/tonweb-mnemonic.js"></script>
+        <script src="libs/easy.qrcode.js"></script>
+        <script src="scripts/animations.js"></script>
+        <script src="scripts/index.js"></script>
+    </body>
+</html>
