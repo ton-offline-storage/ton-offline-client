@@ -111,7 +111,7 @@ function hideHelpPopup(e) {
 
 function modifyMnemonicPageForCreation() {
     $('mnemonic-header').innerHTML = 
-    'Generate your 24-word seed phrase in any convenient way. Write it down or remember, and enter here';
+    'Generate your 24-word seed phrase here or in any convenient way. Write it down, and enter here';
     $('generate-mnemonic-button').style.display = 'inline-block';
 }
 

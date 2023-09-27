@@ -91,7 +91,7 @@ class TxnCreator {
             seqno: seqno,
             payload: comment
         });
-        const query = await txn.getQuery();
+        const query = await txn.getQuery().then((res) => res).catch((err) => {throw err});
         const boc = await query.toBoc(false);
         return boc;
     }
@@ -134,10 +134,9 @@ async function createTransaction() {
     const recepientAdress = $('recipient-address-input').value;
     assertTxnInput(tonweb.Address.isValid(recepientAdress), 'recipient-address-input', 
     'Recepient address is invalid!');
-    
     let amount = $('amount-input').value;
     assertTxnInput(isFinite(amount), 'amount-input', 'The amount is completely invalid!');
-    assertTxnInput(noMoreThan9Decimals(amount), 'amount-input', 'No more than 9 decimals are allowed');
+    assertTxnInput(noMoreThan9Decimals(amount), 'amount-input', 'No more than 9 digits after the decimal point are allowed');
     amount = Number(amount).toFixed(9);
     let nanoAmount = new tonweb.utils.BN(0);
     try {
@@ -155,8 +154,14 @@ async function createTransaction() {
 
     const comment = $('comment-input').value;
    
-    const boc = await txnCreator.sign(recepientAdress, nanoAmount, seqno, comment);
-
+    const boc = await txnCreator.sign(recepientAdress, nanoAmount, seqno, comment)
+    .then((res) => res).catch((err) => {
+        if(err.message == "BitString overflow") {
+            assertTxnInput(false, 'comment-input', 'Comment is too long, takes too much bytes')
+        } else {
+            wrongInputAlert('wrong-txn-alert-label', "Unknown error " + err.message)
+        }
+    });
     $('download-boc-link-2').href = 'data:application/octet-stream;base64,' 
     + tonweb.utils.bytesToBase64(boc);
     qrManager.drawQRcode('qr-container-3', String.fromCharCode.apply(null, boc), true, 0.4);

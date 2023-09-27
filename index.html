@@ -6,6 +6,7 @@
         <meta http-equiv="Pragma" content="no-cache" />
         <meta http-equiv="Expires" content="0" />
         <title>TON offline client</title>
+        <link rel="icon" type="image/x-icon" href="icons/vault_blue.png">
         <link rel="stylesheet" href="styles/styles.css">
     </head>
     <body>
@@ -16,8 +17,8 @@
         <div class="full-screen center-column" id="mnemonic-screen" style="display: none;">
             <button class="style-2 arrow-button left-corner-location" id="mnemonic-back-button"></button>
             <header class="header">
-                <h1 id="mnemonic-header">Generate your 24-word seed phrase in any convenient way. 
-                    Write it down or remember, and enter here</h1>
+                <h1 id="mnemonic-header">Generate your 24-word seed phrase here or in any convenient way. 
+                    Write it down, and enter here</h1>
             </header>
             <div class="grid-6x4">
                 <div class="word-slot">
@@ -137,12 +138,14 @@
                             Scan QR code</button>
                     </div>
                 </div>
-                <label class="info-label label-sizing-1">Send some TON to this address. 
-                    The amount should be sufficient to cover one transaction fee. 
-                    After that, transfer the deployment transaction to an online device 
-                    using this QR code or binary .boc file, and broadcast it.
+                <label class="info-label label-sizing-8">
+                    Scan this transaction in online client. You can postpone deployment,
+                    or fund displayed address, and send deployment now.
                 </label>
-                <div id="deployment-qr-code"></div>
+                <div id="deployment-qr-code"></div> 
+                <label class="info-label label-sizing-7">
+                    Alternatively, move the binary .boc file to an online device and broadcast it some other way.
+                </label>
                 <a class="center-column button-sizing-3" id="download-boc-link" download="wallet-deployment.boc">
                     Download transaction file</a>
             </div>
@@ -173,7 +176,7 @@
                     <label class="popup-label" id="seqno-help-label" style="visibility: hidden;">
                         This is the number of outgoing transactions, sent from your current address, including
                         the deployment transaction. If you are not sure,
-                        check the seqno parameter of your address in some TON blockchain explorer.
+                        check the seqno parameter of your address in online client, or any blockchain explorer.
                     </label>
                 </div>
                 <input class="input-styling-2" id="seqno-input" type="text" 

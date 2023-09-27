@@ -1,5 +1,5 @@
 :root {
-    --blue: #0088CC;
+    --blue: #0098EA;
     --dark-blue: #00699e;
     --gray: rgb(100, 100, 100);
 }
@@ -187,6 +187,15 @@ input:focus {
 
 .label-sizing-5 {
     width: 41.5%;
+}
+
+.label-sizing-7 {
+    font-size: 2.5vh;
+    margin: 2vh 40% 0 40%;
+}
+
+.label-sizing-8 {
+    margin: 0 20% 3.95vh 20%;
 }
 
 .label-styling-1 {
