@@ -29,8 +29,7 @@ body {
 }
 
 .center-column-upside {
-    justify-content: start;
-    margin-top: 9.85vh;
+    margin-top: 1vh;
 }
 
 .center-row {
@@ -98,7 +97,12 @@ a:hover, a:active, button:not(.style-2, .style-3):hover, button:not(.style-2, .s
     max-width: 40%;
 }
 
+h1 {
+    margin-block-end:0;
+}
+
 .grid-6x4 {
+    padding-right: 2.5vw;
     display: grid;
     grid-template-columns: auto auto auto auto;
 }
@@ -118,6 +122,7 @@ a:hover, a:active, button:not(.style-2, .style-3):hover, button:not(.style-2, .s
 }
 
 input {
+    display: inline-block;
     font-family: Roboto, Arial, sans-serif;
     font-size: 3.1vh;
     color: rgb(85, 85, 85);
@@ -125,20 +130,40 @@ input {
     border-bottom: 2px solid var(--gray);
     padding: 0 1px 1px 1px;
     width: 8vw;
+}
+
+.input-border {
+    border-bottom: 1px solid white;
     margin: 0 0 0 0.2vw;
 }
 
 .input-styling-2 {
     font-family: monospace;
     font-size: 3.07vh;
-    width: 41.5%;
+    width: 100%;
+}
+
+.input-border-styling-2 {
+    border-bottom: 1px solid white;
     margin: 0.6vh 0 1.95vh 0;
+    width: 41.5%;
+}
+
+.input-styling-3 {
+    font-family: monospace;
+    font-size: 2.7vh;
+    width: 100%;
+}
+
+.input-border-styling-3 {
+    border-bottom: 1px solid white;
+    margin: 0.6vh 0 1.2vh 0;
+    width: 98%;
 }
 
 input:focus {
     outline: none;
     border-bottom: 3px solid var(--blue);
-    padding: 0 1px;
 }
 
 .alert-label {
@@ -198,6 +223,17 @@ input:focus {
     margin: 0 20% 3.95vh 20%;
 }
 
+.label-sizing-9 {
+    text-align: center;
+    font-size: 2.46vh;
+    margin: 1.2vh 0 0 0;
+    width: fit-content;
+}
+
+.same-width {
+    width: fit-content;
+}
+
 .label-styling-1 {
     display: inline-flex;
     align-items: center;
@@ -219,6 +255,12 @@ input:focus {
 
 .button-sizing-5 {
     font-size: 2.61vh;
+}
+
+.paste-mnemonic-button {
+    font-size: 2.3vh;
+    margin-bottom: 1.2vh;
+    margin-top: 0.3vh;
 }
 
 .button-sizing-6 {

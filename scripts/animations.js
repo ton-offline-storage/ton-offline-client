@@ -8,25 +8,26 @@ function $(element) {
 function paintInputRed(input) {
     input = $(input);
     input.style.borderBottom='3px solid red';
-    input.style.padding='0 1px';
+    input.parentElement.style.borderBottom = 'none';
 }
 
 function paintInputGrey(input) {
     input = $(input);
     input.style.borderBottom='2px solid var(--gray)';
-    input.style.padding='0 1px 1px 1px';
+    input.parentElement.style.borderBottom = '1px solid white';
 }
 
 function paintInputBlue(input) {
     input = $(input);
     input.style.borderBottom='3px solid var(--blue)';
-    input.style.padding='0 1px';
+    input.parentElement.style.borderBottom = 'none';
 }
 
 function paintInputsGrey() {
     for (let input of document.getElementsByTagName('input')) {
         paintInputGrey(input);
     }
+    paintInputGrey($('wallet-id-input'));
 }
 
 function wrongInputAlert(labelId, text) {
@@ -66,6 +67,9 @@ class QRManager {
         if(this.#QRcodes.has(containerId)) {
             this.#QRcodes.get(containerId).clear();
         }
+        console.log(window.innerHeight);
+        console.log(scale);
+        console.log(window.innerHeight * scale);
         this.#QRcodes.set(containerId, new QRCode($(containerId), {
             text: data,
             binary: isBinary,
@@ -146,6 +150,8 @@ function setAnimations() {
     $('seqno-help-button').onclick = switchHelpPopup;
     $('txn-elements').onclick = hideHelpPopup;
     $('mnemonic-back-button').onclick = () => {
+        hideWrongInputAlert('wrong-mnemonic-alert-label');
+        paintInputsGrey();
         switchScreen('mnemonic-screen', 'start-screen');
     }
     $('new-wallet-back-button').onclick = () => {
