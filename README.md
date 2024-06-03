@@ -5,7 +5,7 @@ This is an offline part of [TON Air Gap Wallet](https://github.com/ton-offline-s
 It creates and signs transactions. To broadcast transactions use [Online client](https://github.com/mcnckc/ton-airgap-client)
 
 ## Usage
-Download latest release(`ton-offline-client.zip`), unzip, and open `index.html` in browser
+Download latest [release](https://github.com/ton-offline-storage/ton-offline-client/releases)(`ton-offline-client.zip`), unzip, and open `index.html` in browser
 
 ## Libs
 If you don't trust libraries put in this repository, you can get them from official repositories, and manually put into `libs` folder.
