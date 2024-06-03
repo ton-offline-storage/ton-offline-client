@@ -2,6 +2,7 @@ const tonweb = new window.TonWeb();
 const tonMnemonic = window.TonWeb.mnemonic;
 const DEFAULT_WALLET_VERSION = 'v3R2';
 const MNEMONIC_WORDS_COUNT = 24;
+const MAX_COMMENT_BYTE_LENGTH = 2067;
 const WalletClass = tonweb.wallet.all[DEFAULT_WALLET_VERSION];
 const qrManager = new QRManager();
 let txnCreator;
@@ -97,6 +98,7 @@ async function createWallet() {
     const boc = await deployQuery.toBoc(false);
     $('download-boc-link').href = 'data:application/octet-stream;base64,' 
     + tonweb.utils.bytesToBase64(boc);
+
     qrManager.drawQRcode('deployment-qr-code', String.fromCharCode.apply(null, boc), true, 0.35);
     qrManager.drawQRcode('qr-container-1', address.toString(true, true, false), false, 0.4);
     switchScreen('mnemonic-screen', 'new-wallet-screen');
@@ -110,17 +112,50 @@ class TxnCreator {
         this.#wallet = walletId === -1 ? new WalletClass(undefined, {publicKey: keyPair.publicKey, wc: 0}) :
         new WalletClass(undefined, {publicKey: keyPair.publicKey, wc: 0, walletId: walletId});
     }
+    makeSnakeCells(bytes) {
+        const ROOT_CELL_BYTE_LENGTH = 35 + 4;
+        const CELL_BYTE_LENGTH = 127;
+        const root = new window.TonWeb.boc.Cell();
+        root.bits.writeBytes(bytes.slice(0, Math.min(bytes.length, ROOT_CELL_BYTE_LENGTH)));
+        const cellCount = Math.ceil((bytes.length - ROOT_CELL_BYTE_LENGTH) / CELL_BYTE_LENGTH);
+        if (cellCount > 16) {
+            throw new Error('Text too longgg');
+        }
+        let cell = root;
+        for (let i = 0; i < cellCount; i++) {
+            const prevCell = cell;
+            cell = new window.TonWeb.boc.Cell();
+            const cursor = ROOT_CELL_BYTE_LENGTH + i * CELL_BYTE_LENGTH;
+            cell.bits.writeBytes(bytes.slice(cursor, Math.min(bytes.length, cursor + CELL_BYTE_LENGTH)));
+            prevCell.refs[0] = cell;
+        }
+    
+        return root;
+    }
+    processCommentBytes(commentBytes) {
+        if (commentBytes.length > 0) {
+            const payloadBytes = new Uint8Array(4 + commentBytes.length);
+            payloadBytes[0] = 0; 
+            payloadBytes[1] = 0;
+            payloadBytes[2] = 0;
+            payloadBytes[3] = 0;
+            payloadBytes.set(commentBytes, 4);
+            return this.makeSnakeCells(payloadBytes);
+        } else {
+            return commentBytes
+        }
+    }
     async myAddress() {
         const address = await this.#wallet.getAddress();
         return address.toString(true, true, false);
     }
-    async sign(address, nanoAmount, seqno, comment) {
+    async sign(address, nanoAmount, seqno, commentBytes) {
         const txn = await this.#wallet.methods.transfer({
             secretKey: this.#keyPair.secretKey,
             toAddress: address,
             amount: nanoAmount,
             seqno: seqno,
-            payload: comment,
+            payload: this.processCommentBytes(commentBytes),
             expireAt: (Math.floor(Date.now() / 1e3) + 60 * 15)
         });
         const query = await txn.getQuery().then((res) => res).catch((err) => {throw err});
@@ -191,8 +226,10 @@ async function createTransaction() {
     assertTxnInput(seqno >= 0, 'seqno-input', 'Seqno must be non-negative!');
 
     const comment = $('comment-input').value;
-   
-    const boc = await txnCreator.sign(recepientAdress, nanoAmount, seqno, comment)
+    const commentBytes = new TextEncoder().encode(comment);
+    assertTxnInput(commentBytes.length <= MAX_COMMENT_BYTE_LENGTH, 'comment-input', 'Comment is too long');
+
+    const boc = await txnCreator.sign(recepientAdress, nanoAmount, seqno, commentBytes)
     .then((res) => res).catch((err) => {
         if(err.message == "BitString overflow") {
             assertTxnInput(false, 'comment-input', 'Comment is too long, takes too much bytes')
@@ -202,7 +239,12 @@ async function createTransaction() {
     });
     $('download-boc-link-2').href = 'data:application/octet-stream;base64,' 
     + tonweb.utils.bytesToBase64(boc);
-    qrManager.drawQRcode('qr-container-3', String.fromCharCode.apply(null, boc), true, 0.4);
+    try {
+        qrManager.drawQRcode('qr-container-3', String.fromCharCode.apply(null, boc), true, 0.4);
+    } catch (error) {
+        assertTxnInput(false, 'comment-input', 'Comment is too long');
+    }
+    
 }
 
 async function pasteMnemonic() {

@@ -67,15 +67,12 @@ class QRManager {
         if(this.#QRcodes.has(containerId)) {
             this.#QRcodes.get(containerId).clear();
         }
-        console.log(window.innerHeight);
-        console.log(scale);
-        console.log(window.innerHeight * scale);
         this.#QRcodes.set(containerId, new QRCode($(containerId), {
             text: data,
             binary: isBinary,
             width: window.innerHeight * scale,
             height: window.innerHeight * scale,
-            correctLevel: QRCode.CorrectLevel.M
+            correctLevel: QRCode.CorrectLevel.L
         }));
     }
 }
