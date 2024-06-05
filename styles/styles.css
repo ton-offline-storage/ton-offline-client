@@ -39,7 +39,7 @@ body {
 }
 
 .row-sizing-1 {
-    width: 30%;
+    width: 60vh;
     height: 9%;
     margin: 2vh 0;
 }
@@ -47,7 +47,7 @@ body {
 .button-sizing-1 {
     font-size: 3.5vh;
     padding: 0 1%;
-    width: 22%;
+    width: 44vh;
     margin: 1.4vh 1%;
     height: 12%;
 }
@@ -146,7 +146,7 @@ input {
 .input-border-styling-2 {
     border-bottom: 1px solid white;
     margin: 0.6vh 0 1.95vh 0;
-    width: 41.5%;
+    width: 82vh;
 }
 
 .input-styling-3 {
@@ -211,7 +211,7 @@ input:focus {
 }
 
 .label-sizing-5 {
-    width: 41.5%;
+    width: 82vh;
 }
 
 .label-sizing-7 {
@@ -237,7 +237,7 @@ input:focus {
 .label-styling-1 {
     display: inline-flex;
     align-items: center;
-    width: 41.5%;
+    width: 82vh;
     text-align: left;
 }
 
