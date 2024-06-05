@@ -4,11 +4,17 @@
     --gray: rgb(100, 100, 100);
 }
 
+
 body {
     font-family: Arial, sans-serif;
     background-color: white;
     padding: 0;
     margin: 0;
+}
+
+@font-face {
+    font-family: 'RobotoMono'; 
+    src: url('../fonts/RobotoMono-Regular.ttf');
 }
 
 .full-screen {
@@ -138,8 +144,8 @@ input {
 }
 
 .input-styling-2 {
-    font-family: monospace;
-    font-size: 3.07vh;
+    font-family: 'RobotoMono', monospace;
+    font-size: 2.8vh;
     width: 100%;
 }
 
@@ -150,7 +156,7 @@ input {
 }
 
 .input-styling-3 {
-    font-family: monospace;
+    font-family: 'RobotoMono', monospace;
     font-size: 2.7vh;
     width: 100%;
 }
@@ -188,7 +194,7 @@ input:focus {
 
 .data-label {
     white-space: nowrap;
-    font-family: monospace;
+    font-family: 'RobotoMono', monospace;
 }
 
 .label-sizing-1 {
