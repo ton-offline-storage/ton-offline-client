@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: Roboto, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     background-color: white;
     padding: 0;
     margin: 0;
@@ -60,7 +60,7 @@ body {
 }
 
 a, button {
-    font-family: Roboto, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     font-weight: 400;
     text-decoration: none;
     border: 1px solid var(--blue);
@@ -123,7 +123,7 @@ h1 {
 
 input {
     display: inline-block;
-    font-family: Roboto, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 3.1vh;
     color: rgb(85, 85, 85);
     border: none;
@@ -167,7 +167,7 @@ input:focus {
 }
 
 .alert-label {
-    font-family: Roboto, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     visibility: hidden;
     font-size: 3.5vh;
     color: red;
@@ -176,7 +176,7 @@ input:focus {
 
 .info-label, .data-label {
     text-align: center;
-    font-family: Roboto, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 3.54vh;
     color: black;
     margin: 1.2vh 0;
