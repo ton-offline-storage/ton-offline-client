@@ -59,15 +59,15 @@ function setPublicAddress(labelId, address) {
 }
 
 class QRManager {
-    #QRcodes
+    QRcodes
     constructor() {
-        this.#QRcodes = new Map();
+        this.QRcodes = new Map();
     }
     drawQRcode(containerId, data, isBinary, scale) {
-        if(this.#QRcodes.has(containerId)) {
-            this.#QRcodes.get(containerId).clear();
+        if(this.QRcodes.has(containerId)) {
+            this.QRcodes.get(containerId).clear();
         }
-        this.#QRcodes.set(containerId, new QRCode($(containerId), {
+        this.QRcodes.set(containerId, new QRCode($(containerId), {
             text: data,
             binary: isBinary,
             width: window.innerHeight * scale,

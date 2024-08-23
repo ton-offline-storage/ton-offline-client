@@ -105,11 +105,11 @@ async function createWallet() {
 }
 
 class TxnCreator {
-    #keyPair
-    #wallet
+    keyPair
+    wallet
     constructor(keyPair, walletId) {
-        this.#keyPair = keyPair;
-        this.#wallet = walletId === -1 ? new WalletClass(undefined, {publicKey: keyPair.publicKey, wc: 0}) :
+        this.keyPair = keyPair;
+        this.wallet = walletId === -1 ? new WalletClass(undefined, {publicKey: keyPair.publicKey, wc: 0}) :
         new WalletClass(undefined, {publicKey: keyPair.publicKey, wc: 0, walletId: walletId});
     }
     makeSnakeCells(bytes) {
@@ -146,12 +146,12 @@ class TxnCreator {
         }
     }
     async myAddress() {
-        const address = await this.#wallet.getAddress();
+        const address = await this.wallet.getAddress();
         return address.toString(true, true, false);
     }
     async sign(address, nanoAmount, seqno, commentBytes) {
-        const txn = await this.#wallet.methods.transfer({
-            secretKey: this.#keyPair.secretKey,
+        const txn = await this.wallet.methods.transfer({
+            secretKey: this.keyPair.secretKey,
             toAddress: address,
             amount: nanoAmount,
             seqno: seqno,
@@ -256,7 +256,7 @@ function onMnemonicPaste(e) {
     }
     const words = pastedText.split(/[\r\n\s]+/);
     if (words.length != MNEMONIC_WORDS_COUNT) {
-        return false;
+        return true;
     }
     words.forEach((word, index) => {
         if(index < MNEMONIC_WORDS_COUNT) {
