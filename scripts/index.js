@@ -247,21 +247,28 @@ async function createTransaction() {
     
 }
 
-async function pasteMnemonic() {
-    try {
-        const text = await navigator.clipboard.readText();
-        const words = text.split(/[\r\n\s]+/);
-        words.forEach((word, index) => {
-            if(index < MNEMONIC_WORDS_COUNT) {
-                $('word-input-' + (index + 1)).value = word;
-            }
-        });
-    } catch (err) {}
+function onMnemonicPaste(e) {
+    var pastedText = undefined;
+    if (window.clipboardData && window.clipboardData.getData) {
+        pastedText = window.clipboardData.getData('Text');
+    } else if (e.clipboardData && e.clipboardData.getData) {
+        pastedText = e.clipboardData.getData('text/plain');
+    }
+    const words = pastedText.split(/[\r\n\s]+/);
+    if (words.length != MNEMONIC_WORDS_COUNT) {
+        return false;
+    }
+    words.forEach((word, index) => {
+        if(index < MNEMONIC_WORDS_COUNT) {
+            $('word-input-' + (index + 1)).value = word;
+        }
+    });
+    return false;
 }
 
-$('generate-mnemonic-button').onclick = generateMnemonic;
+$('word-input-1').onpaste = onMnemonicPaste;
 
-$('paste-mnemonic-button').onclick = pasteMnemonic;
+$('generate-mnemonic-button').onclick = generateMnemonic;
 
 $('choose-create-wallet-button').onclick = () => {
     $('confirm-mnemonic-button').onclick = createWallet;

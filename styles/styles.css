@@ -188,6 +188,14 @@ input:focus {
     margin: 1.2vh 0;
 }
 
+.subtle-info-label {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 2.04vh;
+    color: gray;
+    margin: 0 0 1.2vh 0;
+}
+
 .line-unbreakable {
     white-space: nowrap;
 }
