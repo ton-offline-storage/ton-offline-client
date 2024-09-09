@@ -2,6 +2,7 @@
     --blue: #0098EA;
     --dark-blue: #00699e;
     --gray: rgb(100, 100, 100);
+    --light-gray: rgb(150, 150, 150)
 }
 
 
@@ -192,8 +193,16 @@ input:focus {
     text-align: center;
     font-family: Arial, sans-serif;
     font-size: 2.04vh;
-    color: gray;
+    color: var(--light-gray);
     margin: 0 0 1.2vh 0;
+}
+
+.subtle-info-label-2 {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 2.04vh;
+    color: var(--light-gray);
+    margin: 0.3vh;
 }
 
 .line-unbreakable {
