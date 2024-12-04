@@ -156,7 +156,7 @@ class TxnCreator {
             amount: nanoAmount,
             seqno: seqno,
             payload: this.processCommentBytes(commentBytes),
-            expireAt: (Math.floor(Date.now() / 1e3) + 60 * 60 * 24)
+            expireAt: 0xFFFFFFFF
         });
         const query = await txn.getQuery().then((res) => res).catch((err) => {throw err});
         const boc = await query.toBoc(false);
